@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./backend
+    container_name: github-user-info-app
+    volumes:
+      - ./backend:/var/www/html
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: github-user-info-app
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
+      REDIS_HOST: redis
+
+  postgres:
+    image: postgres:13
+    container_name: github-user-info-app-postgres
+    environment:
+      POSTGRES_DB: github-user-info-app
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis
+    container_name: github-user-info-app-redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  pgdata:
