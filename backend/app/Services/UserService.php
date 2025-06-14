@@ -22,7 +22,7 @@ class UserService
         ]);
 
         if ($response->failed()) {
-            return null;
+            throw new \Exception('Erro ao obter usuário.', $response->status());
         }
 
         return $response->json();
@@ -41,7 +41,7 @@ class UserService
         ]);
 
         if ($response->failed()) {
-            return null;
+            throw new \Exception('Erro ao obter followings.', $response->status());
         }
 
         return $response->json();

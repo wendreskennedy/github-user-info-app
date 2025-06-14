@@ -17,23 +17,24 @@ class UserController extends Controller
 
     public function getUser(string $username): JsonResponse
     {
-        $user = $this->service->getUser($username);
+        try {
+            $user = $this->service->getUser($username);
 
-        if (!$user) {
-            return response()->json(['error' => 'Usuário não encontrado.'], 404);
+            return response()->json($user);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Erro ao obter usuário.'], $e->getCode());
         }
-
-        return response()->json($user);
     }
 
     public function getFollowings(string $username): JsonResponse
     {
-        $followings = $this->service->getFollowings($username);
+        try {
 
-        if (!$followings) {
-            return response()->json(['error' => 'Não foi possível obter os followings.'], 404);
+            $followings = $this->service->getFollowings($username);
+
+            return response()->json($followings);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Erro ao obter followings.'], $e->getCode());
         }
-
-        return response()->json($followings);
     }
 }
