@@ -1,18 +1,20 @@
-FROM php:8.1-fpm
+FROM php:8.2-fpm
 
+# Instala dependências do sistema
 RUN apt-get update && apt-get install -y \
     git \
+    curl \
     unzip \
     libpq-dev \
-    libzip-dev \
     zip \
-    curl \
-    && docker-php-ext-install pdo pdo_pgsql zip
+    libzip-dev \
+    libonig-dev \
+    libxml2-dev
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Instala extensões do PHP
+RUN docker-php-ext-install pdo pdo_pgsql zip
+
+# Instala o Composer
+COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
-
-RUN pecl install redis && docker-php-ext-enable redis
-
-EXPOSE 8000

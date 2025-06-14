@@ -23,6 +23,7 @@ services:
   postgres:
     image: postgres:13
     container_name: github-user-info-app-postgres
+    restart: always
     environment:
       POSTGRES_DB: github-user-info-app
       POSTGRES_USER: admin
