@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ApiLog extends Model
 {
-    //
+    protected $fillable = [
+        'method',
+        'endpoint',
+        'payload',
+        'status_code',
+    ];
 }
