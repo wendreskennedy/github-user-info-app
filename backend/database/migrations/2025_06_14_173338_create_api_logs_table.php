@@ -18,6 +18,7 @@ return new class extends Migration
             $table->json('payload')->nullable();
             $table->integer('status_code');
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrentOnUpdate();
         });
     }
 

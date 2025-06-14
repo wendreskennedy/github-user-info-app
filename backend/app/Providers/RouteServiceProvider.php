@@ -8,17 +8,12 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 class RouteServiceProvider extends ServiceProvider
 {
     /**
-     * Caminho da rota "home" após autenticação (se aplicável)
-     *
-     * @var string
-     */
-    public const HOME = '/home';
-
-    /**
      * Registrar serviços de roteamento.
      */
     public function boot(): void
     {
+        parent::boot();
+
         $this->routes(function () {
             Route::prefix('api')
                 ->middleware('api')

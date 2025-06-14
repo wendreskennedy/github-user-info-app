@@ -12,4 +12,10 @@ class ApiLog extends Model
         'payload',
         'status_code',
     ];
+
+    protected $table = 'api_logs';
+
+    protected $primaryKey = 'id';
+
+    public $timestamps = true;
 }

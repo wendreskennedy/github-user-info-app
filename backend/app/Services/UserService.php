@@ -18,7 +18,7 @@ class UserService
             'method' => 'GET',
             'endpoint' => $endpoint,
             'payload' => null,
-            'status' => $response->status(),
+            'status_code' => $response->status(),
         ]);
 
         if ($response->failed()) {
@@ -37,7 +37,7 @@ class UserService
             'method' => 'GET',
             'endpoint' => $endpoint,
             'payload' => null,
-            'status' => $response->status(),
+            'status_code' => $response->status(),
         ]);
 
         if ($response->failed()) {
