@@ -22,7 +22,8 @@ class UserController extends Controller
 
             return response()->json($user);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Erro ao obter usuário.'], $e->getCode());
+            $statusCode = $e->getCode() > 0 && $e->getCode() < 600 ? $e->getCode() : 500;
+            return response()->json(['error' => 'Erro ao obter usuario.'], $statusCode);
         }
     }
 
@@ -34,7 +35,8 @@ class UserController extends Controller
 
             return response()->json($followings);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Erro ao obter followings.'], $e->getCode());
+            $statusCode = $e->getCode() > 0 && $e->getCode() < 600 ? $e->getCode() : 500;
+            return response()->json(['error' => 'Erro ao obter followings do usuario.'], $statusCode);
         }
     }
 }
