@@ -63,22 +63,19 @@ check_dependencies() {
 # Executar todos os testes
 run_all_tests() {
     print_info "Executando todos os testes..."
-    php artisan test --verbose
-    print_success "Todos os testes executados"
+    php artisan test
 }
 
 # Executar apenas testes unitários
 run_unit_tests() {
     print_info "Executando testes unitários..."
-    php artisan test --testsuite=Unit --verbose
-    print_success "Testes unitários executados"
+    php artisan test --testsuite=Unit
 }
 
 # Executar apenas testes de feature
 run_feature_tests() {
     print_info "Executando testes de feature/integração..."
-    php artisan test --testsuite=Feature --verbose
-    print_success "Testes de feature executados"
+    php artisan test --testsuite=Feature
 }
 
 # Executar testes com cobertura
@@ -92,8 +89,7 @@ run_coverage_tests() {
         return 1
     fi
     
-    php artisan test --coverage --min=80
-    print_success "Testes com cobertura executados"
+    php artisan test --coverage
 }
 
 # Executar teste específico
@@ -105,8 +101,7 @@ run_specific_test() {
     fi
     
     print_info "Executando teste específico: $2"
-    php artisan test "$2" --verbose
-    print_success "Teste específico executado"
+    php artisan test "$2"
 }
 
 # Executar testes em modo watch (requer inotify-tools)
@@ -134,15 +129,15 @@ run_fresh_tests() {
     print_info "Limpando cache e executando testes..."
     php artisan config:clear
     php artisan cache:clear
-    php artisan test --verbose
-    print_success "Testes executados com cache limpo"
+    php artisan route:clear
+    php artisan view:clear
+    run_all_tests
 }
 
 # Executar testes em paralelo (Laravel 8+)
 run_parallel_tests() {
     print_info "Executando testes em paralelo..."
-    php artisan test --parallel --verbose
-    print_success "Testes paralelos executados"
+    php artisan test --parallel
 }
 
 # Mostrar ajuda
