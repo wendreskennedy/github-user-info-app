@@ -5,10 +5,10 @@ services:
     build:
       context: ./backend
     container_name: github-user-info-app
-    volumes:
-      - ./backend:/var/www/html
     ports:
       - "8000:8000"
+    volumes:
+      - ./backend:/var/www/html
     depends_on:
       - postgres
       - redis
@@ -29,6 +29,8 @@ services:
     volumes:
       - ./frontend:/app
     command: npm start
+    depends_on:
+      - app
 
   postgres:
     image: postgres:13
