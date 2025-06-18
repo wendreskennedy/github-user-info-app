@@ -1,30 +1,62 @@
-<div *ngIf="user" class="p-4 border rounded shadow-md">
-  <img
-    [src]="user.avatar_url"
-    alt="Avatar"
-    class="w-20 h-20 rounded-full mb-2"
-  />
-  <h2 class="text-xl font-bold">{{ user.name }}</h2>
-  <p class="text-gray-600">@{{ user.login }}</p>
-  <p *ngIf="user.bio" class="mt-2 italic">"{{ user.bio }}"</p>
+<div class="bg-white rounded-xl shadow-md p-6">
+  <div class="flex items-center gap-4">
+    <img
+      [src]="user.avatar_url"
+      alt="avatar"
+      class="w-20 h-20 rounded-full border"
+    />
 
-  <div class="mt-4 space-y-1 text-sm">
-    <p><strong>Empresa:</strong> {{ user.company || "-" }}</p>
-    <p><strong>Localização:</strong> {{ user.location || "-" }}</p>
-    <p>
-      <strong>Blog:</strong>
-      <a [href]="user.blog" target="_blank" class="text-blue-500">{{
-        user.blog
-      }}</a>
-    </p>
-    <p><strong>Repositórios:</strong> {{ user.public_repos }}</p>
-    <p><strong>Seguidores:</strong> {{ user.followers }}</p>
-    <p><strong>Seguindo:</strong> {{ user.following }}</p>
+    <div>
+      <h2 class="text-xl font-bold">{{ user.name }}</h2>
+      <p class="text-gray-600">{{ "@" + user.login }}</p>
+
+      <div class="flex gap-2 mt-2 text-sm text-gray-700">
+        <span *ngIf="user.company">🏢 {{ user.company }}</span>
+        <span *ngIf="user.location">📍 {{ user.location }}</span>
+      </div>
+    </div>
   </div>
 
-  <div class="mt-4">
-    <a [href]="user.html_url" target="_blank" class="text-blue-600 underline"
-      >Ver no GitHub</a
+  <div class="mt-4 grid grid-cols-3 gap-4 text-center text-sm">
+    <div>
+      <p class="font-bold">{{ user.public_repos }}</p>
+      <p class="text-gray-500">Repositórios</p>
+    </div>
+    <div>
+      <p class="font-bold">{{ user.followers }}</p>
+      <p class="text-gray-500">Seguidores</p>
+    </div>
+    <div>
+      <p class="font-bold">{{ user.following }}</p>
+      <p class="text-gray-500">Seguindo</p>
+    </div>
+  </div>
+
+  <div class="mt-4 flex gap-4 text-sm">
+    <a
+      [href]="user.html_url"
+      target="_blank"
+      class="text-blue-600 hover:underline"
+      >GitHub</a
     >
+
+    <a
+      *ngIf="user.blog"
+      [href]="user.blog"
+      target="_blank"
+      class="text-blue-600 hover:underline"
+      >Blog</a
+    >
+
+    <button (click)="showBio = !showBio" class="text-blue-600 hover:underline">
+      Ver bio
+    </button>
+  </div>
+
+  <div
+    *ngIf="showBio"
+    class="mt-4 p-3 border rounded bg-gray-50 text-sm text-gray-800"
+  >
+    {{ user.bio || "Sem bio cadastrada" }}
   </div>
 </div>

@@ -10,4 +10,5 @@ import { CommonModule } from '@angular/common';
 })
 export class UserCardComponent {
   @Input() user: any;
+  showBio = false;
 }

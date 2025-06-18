@@ -1,4 +1,10 @@
-<div class="max-w-xl mx-auto p-4">
+<div class="max-w-2xl mx-auto p-4">
   <app-search (search)="onSearch($event)"></app-search>
+
   <app-user-card *ngIf="user" [user]="user" class="mt-6"></app-user-card>
+
+  <app-followings
+    *ngIf="followings.length"
+    [followings]="followings"
+  ></app-followings>
 </div>

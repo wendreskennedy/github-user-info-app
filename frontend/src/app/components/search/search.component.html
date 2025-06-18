@@ -1,11 +1,16 @@
-<form (submit)="onSubmit()" class="flex gap-2">
+<form (ngSubmit)="onSubmit()" class="flex items-center gap-2">
   <input
     type="text"
     [(ngModel)]="username"
-    placeholder="Buscar usuário"
-    class="border p-2 rounded w-full"
+    name="username"
+    placeholder="Buscar usuário GitHub"
+    required
+    class="flex-1 p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
   />
-  <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+  <button
+    type="submit"
+    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+  >
     Buscar
   </button>
 </form>
