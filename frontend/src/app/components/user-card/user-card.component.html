@@ -1,1 +1,30 @@
-<p>user-card works!</p>
+<div *ngIf="user" class="p-4 border rounded shadow-md">
+  <img
+    [src]="user.avatar_url"
+    alt="Avatar"
+    class="w-20 h-20 rounded-full mb-2"
+  />
+  <h2 class="text-xl font-bold">{{ user.name }}</h2>
+  <p class="text-gray-600">@{{ user.login }}</p>
+  <p *ngIf="user.bio" class="mt-2 italic">"{{ user.bio }}"</p>
+
+  <div class="mt-4 space-y-1 text-sm">
+    <p><strong>Empresa:</strong> {{ user.company || "-" }}</p>
+    <p><strong>Localização:</strong> {{ user.location || "-" }}</p>
+    <p>
+      <strong>Blog:</strong>
+      <a [href]="user.blog" target="_blank" class="text-blue-500">{{
+        user.blog
+      }}</a>
+    </p>
+    <p><strong>Repositórios:</strong> {{ user.public_repos }}</p>
+    <p><strong>Seguidores:</strong> {{ user.followers }}</p>
+    <p><strong>Seguindo:</strong> {{ user.following }}</p>
+  </div>
+
+  <div class="mt-4">
+    <a [href]="user.html_url" target="_blank" class="text-blue-600 underline"
+      >Ver no GitHub</a
+    >
+  </div>
+</div>

@@ -1,1 +1,11 @@
-<p>search works!</p>
+<form (submit)="onSubmit()" class="flex gap-2">
+  <input
+    type="text"
+    [(ngModel)]="username"
+    placeholder="Buscar usuário"
+    class="border p-2 rounded w-full"
+  />
+  <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+    Buscar
+  </button>
+</form>

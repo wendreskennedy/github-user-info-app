@@ -1,5 +1,5 @@
 {
-  "name": "github-frontend",
+  "name": "github-user-info-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

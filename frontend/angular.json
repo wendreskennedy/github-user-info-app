@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "github-frontend": {
+    "github-user-info-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/github-frontend",
+            "outputPath": "dist/github-user-info-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -57,10 +57,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "github-frontend:build:production"
+              "buildTarget": "github-user-info-app:build:production"
             },
             "development": {
-              "buildTarget": "github-frontend:build:development"
+              "buildTarget": "github-user-info-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -68,7 +68,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "github-frontend:build"
+            "buildTarget": "github-user-info-app:build"
           }
         },
         "test": {

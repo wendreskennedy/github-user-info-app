@@ -1,12 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-search',
   standalone: true,
-  imports: [],
+  selector: 'app-search',
+  imports: [CommonModule, FormsModule],
   templateUrl: './search.component.html',
-  styleUrl: './search.component.css'
+  styleUrls: ['./search.component.css'],
 })
 export class SearchComponent {
+  username = '';
 
+  @Output() search = new EventEmitter<string>();
+
+  onSubmit() {
+    if (this.username.trim()) {
+      this.search.emit(this.username.trim());
+    }
+  }
 }
