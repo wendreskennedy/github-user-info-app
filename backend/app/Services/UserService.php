@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 use App\Models\ApiLog;
+use Illuminate\Support\Facades\Cache;
 
 class UserService
 {
@@ -12,7 +13,14 @@ class UserService
     public function getUser(string $username): ?array
     {
         $endpoint = $this->baseUrl . $username;
-        $response = Http::get($endpoint);
+
+        $response = Cache::remember("github_user_{$username}", now()->addMinutes(30), function () use ($endpoint) {
+            $response = Http::get($endpoint);
+
+            if ($response->failed()) {
+                throw new \Exception('Erro ao obter usuario.', $response->status());
+            }
+        });
 
         $this->logRequest([
             'method' => 'GET',
@@ -20,10 +28,6 @@ class UserService
             'payload' => null,
             'status_code' => $response->status(),
         ]);
-
-        if ($response->failed()) {
-            throw new \Exception('Erro ao obter usuario.', $response->status());
-        }
 
         return $response->json();
     }
@@ -31,7 +35,13 @@ class UserService
     public function getFollowings(string $username): ?array
     {
         $endpoint = $this->baseUrl . $username . '/following';
-        $response = Http::get($endpoint);
+        $response = Cache::remember("github_followings_{$username}", now()->addMinutes(30), function () use ($endpoint) {
+            $response = Http::get($endpoint);
+
+            if ($response->failed()) {
+                throw new \Exception('Erro ao obter followings.', $response->status());
+            }
+        });
 
         $this->logRequest([
             'method' => 'GET',
@@ -39,10 +49,6 @@ class UserService
             'payload' => null,
             'status_code' => $response->status(),
         ]);
-
-        if ($response->failed()) {
-            throw new \Exception('Erro ao obter followings.', $response->status());
-        }
 
         return $response->json();
     }
@@ -52,8 +58,6 @@ class UserService
         try {
             ApiLog::create($data);
         } catch (\Exception $e) {
-            // Silently fail if database is not available (e.g., in testing)
-            // In production, you might want to log this to a file or monitoring service
         }
     }
 }
