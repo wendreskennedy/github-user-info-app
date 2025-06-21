@@ -48,6 +48,7 @@ export class AppComponent {
 
     this.userService.getFollowings(username).subscribe({
       next: (data) => {
+        console.log(data);
         this.followings = data;
       },
       error: (error) => {},

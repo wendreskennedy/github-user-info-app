@@ -19,7 +19,9 @@
         class="w-12 h-12 rounded-full"
       />
       <div>
-        <p class="font-semibold">{{ user.name || "(sem nome)" }}</p>
+        <p class="font-semibold">
+          {{ user.login }}
+        </p>
         <p class="text-sm text-gray-600">{{ "@" + user.login }}</p>
       </div>
       <a
