@@ -2,7 +2,7 @@
 
 Aplicação fullstack para exibição de informações de usuários GitHub, desenvolvida com Laravel (backend) e Angular (frontend).
 
-## Overview
+## 📖 Overview
 
 A aplicação permite:
 
