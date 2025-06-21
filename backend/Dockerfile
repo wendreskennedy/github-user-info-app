@@ -9,7 +9,9 @@ RUN apt-get update && apt-get install -y \
     zip \
     libzip-dev \
     libonig-dev \
-    libxml2-dev
+    libxml2-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Instala extensões do PHP
 RUN docker-php-ext-install pdo pdo_pgsql zip
@@ -22,10 +24,7 @@ COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-COPY . .
-
-RUN composer install
-
 EXPOSE 8000
 
-CMD php artisan serve --host=0.0.0.0 --port=8000
+# Comando simples que verifica vendor e inicia o servidor
+CMD ["sh", "-c", "if [ ! -d 'vendor' ]; then composer install --no-interaction --optimize-autoloader; fi && php artisan serve --host=0.0.0.0 --port=8000"]
