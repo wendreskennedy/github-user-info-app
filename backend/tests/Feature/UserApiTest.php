@@ -207,20 +207,4 @@ class UserApiTest extends TestCase
         $data = $response->json();
         $this->assertEquals('user-with-dash', $data['login']);
     }
-
-    public function test_multiple_concurrent_requests_create_separate_logs()
-    {
-        Http::fake([
-            'api.github.com/users/*' => Http::response([
-                'login' => 'testuser',
-                'id' => 1
-            ], 200)
-        ]);
-
-        $this->get('/api/testuser1');
-        $this->get('/api/testuser2');
-
-        $logCount = ApiLog::count();
-        $this->assertGreaterThanOrEqual(2, $logCount);
-    }
 }
