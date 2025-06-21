@@ -2,6 +2,16 @@
 
 Aplicação fullstack para exibição de informações de usuários GitHub, desenvolvida com Laravel (backend) e Angular (frontend).
 
+## Overview
+
+A aplicação permite:
+
+- Buscar por um nome de usuário GitHub
+- Visualizar dados públicos do usuário
+- Listagem com filtro de busca dos followings do usuário
+- Armazenamento de logs para chamadas API
+- Utilização de cache (Redis) nas rotas GET do backend
+
 ## 📋 Requisitos
 
 - **PHP**: ^8.2
@@ -69,6 +79,7 @@ php artisan cache:clear               # Limpa cache
 php artisan config:clear              # Limpa cache de configuração
 php artisan route:clear               # Limpa cache de rotas
 
+```
 
 ### Frontend (Angular)
 
@@ -82,6 +93,8 @@ ng build --watch                      # Build com watch mode
 ng generate component nome            # Cria componente
 ng generate service nome              # Cria service
 ng generate module nome               # Cria módulo
+
+```
 
 ### Docker
 
@@ -137,10 +150,8 @@ docker exec -it github-user-info-app php artisan test
 
 ## 📚 Estrutura do Projeto
 
-    ```
     github-user-info-app/
     ├── backend/           # API Laravel
     ├── frontend/          # Aplicação Angular
     ├── docker-compose.yml # Configuração Docker
     └── README.md         # Este arquivo
-    ```
